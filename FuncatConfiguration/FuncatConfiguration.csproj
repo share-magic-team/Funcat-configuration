@@ -8,6 +8,8 @@
     <PackageLicenseExpression>https://licenses.nuget.org/MIT</PackageLicenseExpression>
     <Description>Allows to split configuration data into multiple files and classes. Store configuration files on the file system, in azure blobs, or otherwise.</Description>
     <PackageTags>configuration, configs, multiple classes configuration</PackageTags>
+    <PackageProjectUrl>https://github.com/share-magic-team/Funcat-configuration</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/share-magic-team/Funcat-configuration</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
