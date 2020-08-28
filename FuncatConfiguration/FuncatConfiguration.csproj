@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Copyright>MIT</Copyright>
-    <PackageLicenseExpression>https://licenses.nuget.org/MIT</PackageLicenseExpression>
+    <Copyright>Anton Novgorodcev @ 2020</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Allows to split configuration data into multiple files and classes. Store configuration files on the file system, in azure blobs, or otherwise.</Description>
     <PackageTags>configuration, configs, multiple classes configuration</PackageTags>
     <PackageProjectUrl>https://github.com/share-magic-team/Funcat-configuration</PackageProjectUrl>
