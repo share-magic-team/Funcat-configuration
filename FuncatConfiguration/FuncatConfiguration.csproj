@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Copyright>MIT</Copyright>
+    <PackageLicenseExpression>https://licenses.nuget.org/MIT</PackageLicenseExpression>
+    <Description>Allows to split configuration data into multiple files and classes. Store configuration files on the file system, in azure blobs, or otherwise.</Description>
+    <PackageTags>configuration, configs, multiple classes configuration</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FuncatConfiguration.Abstractions\FuncatConfiguration.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
