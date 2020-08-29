@@ -15,7 +15,7 @@ namespace FuncatConfiguration.Tests
         public void Should_build_and_get_configs()
         {
             // Arrange
-            var builder = new ConfigurationManagerBuilder();
+            var builder = ConfigurationManagerBuilder.Create();
             var manager = builder
                 .WithConfigurationType<Config1>(true)
                 .WithConfigurationType<Config2>(true)
@@ -42,7 +42,7 @@ namespace FuncatConfiguration.Tests
         [TestMethod]
         public async Task Should_fail_build_cause_of_deserializer_not_set()
         {
-            var builder = new ConfigurationManagerBuilder();
+            var builder = ConfigurationManagerBuilder.Create();
 
             await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => builder
                 .WithConfigurationType<Config1>(true)
@@ -58,7 +58,7 @@ namespace FuncatConfiguration.Tests
         [TestMethod]
         public async Task Should_fail_build_cause_of_storage_not_set()
         {
-            var builder = new ConfigurationManagerBuilder();
+            var builder = ConfigurationManagerBuilder.Create();
 
             await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => builder
                 .WithConfigurationType<Config1>(true)
@@ -70,7 +70,7 @@ namespace FuncatConfiguration.Tests
         [TestMethod]
         public async Task Should_fail_build_cause_of_zero_config_count()
         {
-            var builder = new ConfigurationManagerBuilder();
+            var builder = ConfigurationManagerBuilder.Create();
 
             await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => builder
                 .WithDeserializer(new MockDeserializer())
