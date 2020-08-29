@@ -34,7 +34,7 @@ namespace FuncatConfiguration
         public async Task<T> GetConfigurationAsync<T>(string name, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Confugration name not set", nameof(name));
+                throw new ArgumentException("Configuration name not set", nameof(name));
 
             if (!_configurationTypes.TryGetValue(name, out var info))
                 throw new InvalidOperationException($"Configuration not registered: [{name}]");

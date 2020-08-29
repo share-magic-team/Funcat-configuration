@@ -10,6 +10,7 @@
     <PackageTags>configuration, configs, multiple classes configuration</PackageTags>
     <PackageProjectUrl>https://github.com/share-magic-team/Funcat-configuration</PackageProjectUrl>
     <RepositoryUrl>https://github.com/share-magic-team/Funcat-configuration</RepositoryUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
