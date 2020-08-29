@@ -19,4 +19,8 @@
     <ProjectReference Include="..\FuncatConfiguration\FuncatConfiguration.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TestConfiguration\" />
+  </ItemGroup>
+
 </Project>

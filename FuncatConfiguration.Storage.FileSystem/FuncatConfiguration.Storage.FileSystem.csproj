@@ -1,22 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>File system storage library for FuncatConfiguration. Allows to get configuration files from file system.</Description>
     <Copyright>Anton Novgorodcev @ 2020</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Description>Allows to split configuration data into multiple files and classes. Store configuration files on the file system, in azure blobs, or otherwise.</Description>
-    <PackageTags>configuration, configs, multiple classes configuration</PackageTags>
     <PackageProjectUrl>https://github.com/share-magic-team/Funcat-configuration</PackageProjectUrl>
     <RepositoryUrl>https://github.com/share-magic-team/Funcat-configuration</RepositoryUrl>
-    <Version>1.0.1</Version>
-    <AssemblyVersion>1.0.1.1</AssemblyVersion>
-    <FileVersion>1.0.1.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FuncatConfiguration.Abstractions\FuncatConfiguration.Abstractions.csproj" />
+    <ProjectReference Include="..\FuncatConfiguration\FuncatConfiguration.csproj" />
   </ItemGroup>
 
 </Project>

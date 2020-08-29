@@ -8,6 +8,9 @@ using FuncatConfiguration.Abstractions;
 
 namespace FuncatConfiguration
 {
+    /// <summary>
+    /// Configuration types manager
+    /// </summary>
     public class ConfigurationManager
     {
         private readonly Dictionary<string, object> _cache = new Dictionary<string, object>();
@@ -26,11 +29,22 @@ namespace FuncatConfiguration
                 _configurationTypes = configurationTypes;
         }
 
+        /// <summary>
+        /// Returns array of available configuration types
+        /// </summary>
+        /// <returns>Array of configuration types</returns>
         public Type[] GetAvailableConfigurationTypes()
         {
             return _configurationTypes.Select(x => x.Value.Type).ToArray();
         }
 
+        /// <summary>
+        /// Get configuration instance
+        /// </summary>
+        /// <typeparam name="T">Configuration type</typeparam>
+        /// <param name="name">Configration name</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Task with configuration instance</returns>
         public async Task<T> GetConfigurationAsync<T>(string name, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -50,6 +64,12 @@ namespace FuncatConfiguration
             return conf2;
         }
 
+        /// <summary>
+        /// Get configuration instance
+        /// </summary>
+        /// <typeparam name="T">Configuration type</typeparam>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Task with configuration instance</returns>
         public Task<T> GetConfigurationAsync<T>(CancellationToken cancellationToken)
         {
             return GetConfigurationAsync<T>(typeof(T).Name, cancellationToken);
