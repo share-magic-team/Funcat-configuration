@@ -3,9 +3,6 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-trigger:
-- master
-
 variables:
   # Agent VM image name
   vmImageName: 'windows-latest'
@@ -45,6 +42,8 @@ stages:
         packagesToPush: $(System.DefaultWorkingDirectory)/FuncatConfiguration/bin/Release/*.nupkg
         nuGetFeedType: 'external'
         publishFeedCredentials: 'nuget.org'
+        allowPackageConflicts: true
+        versioningScheme: byBuildNumber
 
     - task: NuGetCommand@2
       inputs:
@@ -52,3 +51,5 @@ stages:
         packagesToPush: $(System.DefaultWorkingDirectory)/FuncatConfiguration.Abstractions/bin/Release/*.nupkg
         nuGetFeedType: 'external'
         publishFeedCredentials: 'nuget.org'
+        allowPackageConflicts: true
+        versioningScheme: byBuildNumber
