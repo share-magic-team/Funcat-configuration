@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Abstractions library for FuncatConfiguration. Allows to split configuration data into multiple files and classes. Store configuration files on the file system, in azure blobs, or otherwise.</Description>
+    <Copyright>Anton Novgorodcev @ 2020</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/share-magic-team/Funcat-configuration</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/share-magic-team/Funcat-configuration</RepositoryUrl>
+    <PackageTags>configuration, configs, multiple classes configuration</PackageTags>
   </PropertyGroup>
 
 </Project>
