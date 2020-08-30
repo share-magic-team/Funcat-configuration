@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FuncatConfiguration.Deserializer.Json\FuncatConfiguration.Deserializer.Json.csproj" />
     <ProjectReference Include="..\FuncatConfiguration.Storage.FileSystem\FuncatConfiguration.Storage.FileSystem.csproj" />
-    <ProjectReference Include="..\FuncatConfiguration\FuncatConfiguration.csproj" />
+    <PackageReference Include="FuncatConfiguration.Deserializer.Json" Version="1.0.1" />
+    <PackageReference Include="FuncatConfiguration" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
