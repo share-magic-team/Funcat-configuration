@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FuncatConfiguration.Abstractions" Version="1.0.1" />
+    <PackageReference Include="FuncatConfiguration.Abstractions" Version="1.0.2" />
     <PackageReference Include="FuncatConfiguration" Version="1.0.2" />
   </ItemGroup>
 
