@@ -27,12 +27,12 @@ stages:
       displayName: Build
       inputs:
         command: 'restore'
-        projects: '$(System.DefaultWorkingDirectory)/*.sln'
+        projects: '$(System.DefaultWorkingDirectory)/FuncatConfiguration.Abstractions/*.sln'
         feedsToUse: 'select'
 
     - task: MSBuild@1
       inputs:
-        solution: $(System.DefaultWorkingDirectory)/*.sln
+        solution: $(System.DefaultWorkingDirectory)/FuncatConfiguration.Abstractions/*.sln
         configuration: Release
         msbuildArguments: /p:DeployOnBuild=true
 
@@ -49,16 +49,7 @@ stages:
     - task: NuGetCommand@2
       inputs:
         command: 'push'
-        packagesToPush: $(System.DefaultWorkingDirectory)/FuncatConfiguration/bin/Release/*.nupkg
-        nuGetFeedType: 'external'
-        publishFeedCredentials: 'nuget.org'
-        allowPackageConflicts: true
-        versioningScheme: byBuildNumber
-
-    - task: NuGetCommand@2
-      inputs:
-        command: 'push'
-        packagesToPush: $(System.DefaultWorkingDirectory)/FuncatConfiguration.Abstractions/bin/Release/*.nupkg
+        packagesToPush: $(System.DefaultWorkingDirectory)/FuncatConfiguration.Abstractions/FuncatConfiguration.Abstractions/bin/Release/*.nupkg
         nuGetFeedType: 'external'
         publishFeedCredentials: 'nuget.org'
         allowPackageConflicts: true
