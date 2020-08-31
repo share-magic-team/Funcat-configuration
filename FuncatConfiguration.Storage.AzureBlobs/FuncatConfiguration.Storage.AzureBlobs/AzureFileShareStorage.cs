@@ -16,7 +16,7 @@ namespace FuncatConfiguration.Storage.AzureBlobs
         private readonly string _shareName;
         private CloudFileDirectory _cloudFileDirectory;
 
-        internal AzureFileShareStorage(string connectionString, string shareName, string relativePathInShare)
+        internal AzureFileShareStorage(string connectionString, string shareName, string relativePathInShare = null)
         {
             _connectionString = connectionString;
             _shareName = shareName;
@@ -44,6 +44,7 @@ namespace FuncatConfiguration.Storage.AzureBlobs
 
                 var stream = new MemoryStream();
                 await items[0].DownloadToStreamAsync(stream, cancellationToken);
+                stream.Position = 0;
                 return stream;
             }
         }

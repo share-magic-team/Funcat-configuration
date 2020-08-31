@@ -10,7 +10,7 @@
         /// <param name="containerName">Configuration files container name</param>
         /// <param name="relativePathInContainer">Relative path to folder in container that contains configuration files</param>
         /// <returns>Builder</returns>
-        public static ConfigurationManagerBuilder WithAzureBlobsStorage(this ConfigurationManagerBuilder builder, string connectionString, string containerName, string relativePathInContainer)
+        public static ConfigurationManagerBuilder WithAzureBlobsStorage(this ConfigurationManagerBuilder builder, string connectionString, string containerName, string relativePathInContainer = null)
         {
             return builder.WithStorage(new AzureBlobStorage(connectionString, containerName, relativePathInContainer));
         }
@@ -23,7 +23,7 @@
         /// <param name="containerName">Configuration files container name</param>
         /// <param name="relativePathInContainer">Relative path to folder in container that contains configuration files</param>
         /// <returns>Builder</returns>
-        public static ConfigurationManagerBuilder WithAzureFileShareStorage(this ConfigurationManagerBuilder builder, string connectionString, string shareName, string relativePathInShare)
+        public static ConfigurationManagerBuilder WithAzureFileShareStorage(this ConfigurationManagerBuilder builder, string connectionString, string shareName, string relativePathInShare = null)
         {
             return builder.WithStorage(new AzureFileShareStorage(connectionString, shareName, relativePathInShare));
         }

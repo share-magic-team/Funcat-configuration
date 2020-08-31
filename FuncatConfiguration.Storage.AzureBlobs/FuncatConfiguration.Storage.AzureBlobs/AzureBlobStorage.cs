@@ -14,8 +14,8 @@ namespace FuncatConfiguration.Storage.AzureBlobs
         private readonly string _connectionString;
         private readonly string _containerName;
         private readonly string _relativePathInContainer;
-        private CloudBlobDirectory _cloudBlobDirectory;
         private CloudBlobContainer _cloudBlobContainer;
+        private CloudBlobDirectory _cloudBlobDirectory;
 
         internal AzureBlobStorage(string connectionString, string containerName, string relativePathInContainer)
         {
@@ -29,8 +29,6 @@ namespace FuncatConfiguration.Storage.AzureBlobs
             if (string.IsNullOrWhiteSpace(configName))
                 throw new ArgumentException("Config name cannot be null or empty string", nameof(configName));
 
-            configName = configName.ToLowerInvariant();
-
             return FindByName(configName);
 
             async Task<Stream> FindByName(string name)
@@ -39,10 +37,12 @@ namespace FuncatConfiguration.Storage.AzureBlobs
 
                 if (_cloudBlobDirectory != null)
                 {
+                    configName = _cloudBlobDirectory.Prefix + configName;
+
                     items = _cloudBlobDirectory
                         .ListBlobs(useFlatBlobListing: true)
                         .OfType<CloudBlob>()
-                        .Where(x => x.Name.ToLowerInvariant().StartsWith(configName))
+                        .Where(x => x.Name.StartsWith(configName, StringComparison.InvariantCultureIgnoreCase))
                         .ToArray();
                 }
                 else
@@ -50,7 +50,7 @@ namespace FuncatConfiguration.Storage.AzureBlobs
                     items = _cloudBlobContainer
                         .ListBlobs(useFlatBlobListing: true)
                         .OfType<CloudBlob>()
-                        .Where(x => x.Name.ToLowerInvariant().StartsWith(configName))
+                        .Where(x => x.Name.StartsWith(configName, StringComparison.InvariantCultureIgnoreCase))
                         .ToArray();
                 }
 
@@ -61,6 +61,7 @@ namespace FuncatConfiguration.Storage.AzureBlobs
 
                 var stream = new MemoryStream();
                 await items[0].DownloadToStreamAsync(stream, cancellationToken);
+                stream.Position = 0;
                 return stream;
             }
         }

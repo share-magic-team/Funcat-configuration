@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncatConfiguration.Storage.AzureBlobs", "FuncatConfiguration.Storage.AzureBlobs\FuncatConfiguration.Storage.AzureBlobs.csproj", "{7A035C0C-4614-4D27-A2E9-A57CDECAEDCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncatConfiguration.Storage.AzureBlobs.TestApp", "FuncatConfiguration.Storage.AzureBlobs.TestApp\FuncatConfiguration.Storage.AzureBlobs.TestApp.csproj", "{EBDF1845-0E87-4F4D-B03D-0E9CE0EC05FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncatConfiguration.Storage.AzureBlobs.Tests", "FuncatConfiguration.Storage.AzureBlobs.Tests\FuncatConfiguration.Storage.AzureBlobs.Tests.csproj", "{8204A89C-871E-46C1-A638-9FC514B66120}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{7A035C0C-4614-4D27-A2E9-A57CDECAEDCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A035C0C-4614-4D27-A2E9-A57CDECAEDCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A035C0C-4614-4D27-A2E9-A57CDECAEDCB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBDF1845-0E87-4F4D-B03D-0E9CE0EC05FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBDF1845-0E87-4F4D-B03D-0E9CE0EC05FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBDF1845-0E87-4F4D-B03D-0E9CE0EC05FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBDF1845-0E87-4F4D-B03D-0E9CE0EC05FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8204A89C-871E-46C1-A638-9FC514B66120}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8204A89C-871E-46C1-A638-9FC514B66120}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8204A89C-871E-46C1-A638-9FC514B66120}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8204A89C-871E-46C1-A638-9FC514B66120}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
