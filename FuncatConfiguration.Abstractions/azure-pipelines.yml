@@ -36,16 +36,6 @@ stages:
         configuration: Release
         msbuildArguments: /p:DeployOnBuild=true
 
-    - task: VSTest@2
-      inputs:
-        testSelector: 'testAssemblies'
-        testAssemblyVer2: |
-          **\*test*.dll
-          **\*Test*.dll
-          !**\*TestAdapter.dll
-          !**\obj\**
-        searchFolder: '$(System.DefaultWorkingDirectory)'
-
     - task: NuGetCommand@2
       inputs:
         command: 'push'
