@@ -97,6 +97,24 @@ namespace FuncatConfiguration
         }
 
         /// <summary>
+        /// Register DI container registrar
+        /// </summary>
+        /// <param name="builder">Builder</param>
+        /// <param name="serviceCollectionRegistrar">Class that represents functionality to register configuration files in DI container</param>
+        /// <returns></returns>
+        public static ConfigurationManagerBuilder WithServiceCollectionRegistrar(this ConfigurationManagerBuilder builder, IServiceCollectionRegistrar serviceCollectionRegistrar)
+        {
+            if (serviceCollectionRegistrar is null)
+                throw new ArgumentNullException(nameof(serviceCollectionRegistrar));
+
+            if (builder.ServiceCollectionRegistrar != null)
+                throw new InvalidOperationException("ServiceCollectionRegistrar already set");
+
+            builder.ServiceCollectionRegistrar = serviceCollectionRegistrar;
+            return builder;
+        }
+
+        /// <summary>
         /// Register storage for configuration data
         /// </summary>
         /// <param name="builder">Builder</param>

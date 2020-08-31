@@ -53,12 +53,12 @@ namespace FuncatConfiguration
             if (!_configurationTypes.TryGetValue(name, out var info))
                 throw new InvalidOperationException($"Configuration not registered: [{name}]");
 
-            if (info.CacheConfigration && _cache.TryGetValue(name, out var conf1))
+            if (info.CacheConfiguration && _cache.TryGetValue(name, out var conf1))
                 return (T)conf1;
 
             var conf2 = await LoadConfigurationAsync<T>(name, cancellationToken);
 
-            if (info.CacheConfigration)
+            if (info.CacheConfiguration)
                 _cache.Add(name, conf2);
 
             return conf2;

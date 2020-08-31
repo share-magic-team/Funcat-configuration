@@ -1,4 +1,6 @@
-﻿namespace FuncatConfiguration.Abstractions
+﻿using System;
+
+namespace FuncatConfiguration.Abstractions
 {
     /// <summary>
     /// Allows to register configurations in DI container
@@ -9,7 +11,7 @@
         /// Register type in DI container
         /// </summary>
         /// <typeparam name="T">Configuration type</typeparam>
-        /// <param name="config">Configuration</param>
-        void Register<T>(T config);
+        /// <param name="configurationFactory">Configuration factory</param>
+        void Register<T>(Func<T> configurationFactory);
     }
 }
