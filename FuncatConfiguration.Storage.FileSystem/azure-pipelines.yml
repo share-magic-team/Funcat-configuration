@@ -33,7 +33,7 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: 'test'
-        projects: '$(System.DefaultWorkingDirectory)/FuncatConfiguration.Storage.AzureBlobs/FuncatConfiguration.Storage.AzureBlobs.Tests/FuncatConfiguration.Storage.AzureBlobs.Tests.csproj'
+        projects: '$(System.DefaultWorkingDirectory)/FuncatConfiguration.Storage.FileSystem/FuncatConfiguration.Storage.FileSystem.Tests/FuncatConfiguration.Storage.FileSystem.Tests.csproj'
 
     - task: MSBuild@1
       inputs:
