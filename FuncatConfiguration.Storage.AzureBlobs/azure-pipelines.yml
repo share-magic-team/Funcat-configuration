@@ -32,9 +32,9 @@ stages:
 
     - task: FileTransform@1
       inputs:
-        folderPath: '$(System.DefaultWorkingDirectory)/FuncatConfiguration.Storage.AzureBlobs.Tests/*'
+        folderPath: '$(System.DefaultWorkingDirectory)/FuncatConfiguration.Storage.AzureBlobs.Tests'
         fileType: json
-        targetFiles: 'application.json'
+        targetFiles: '**/application.json'
 
     - task: MSBuild@1
       inputs:
