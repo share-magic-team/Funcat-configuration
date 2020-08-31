@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Azure blobs storage library for FuncatConfiguration. Allows to get configuration files from Azure storage account.</Description>
+    <Copyright>Anton Novgorodcev @ 2020</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/share-magic-team/Funcat-configuration</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/share-magic-team/Funcat-configuration</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FuncatConfiguration.Abstractions" Version="1.0.2" />
+    <PackageReference Include="FuncatConfiguration" Version="1.0.2" />
+    <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.2.2" />
+    <PackageReference Include="Microsoft.Azure.Storage.File" Version="11.2.2" />
+  </ItemGroup>
+
+</Project>
