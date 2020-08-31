@@ -16,13 +16,14 @@ namespace FuncatConfiguration
         private readonly Dictionary<string, object> _cache = new Dictionary<string, object>();
         private readonly ReadOnlyDictionary<string, ConfigurationTypeInfo> _configurationTypes;
         private readonly IDeserializer _deserializer;
+        private readonly IServiceCollectionRegistrar _serviceCollectionRegistrar;
         private readonly IStorage _storage;
 
-        internal ConfigurationManager(IStorage storage, IDeserializer deserializer, ReadOnlyDictionary<string, ConfigurationTypeInfo> configurationTypes)
+        internal ConfigurationManager(IStorage storage, IDeserializer deserializer, ReadOnlyDictionary<string, ConfigurationTypeInfo> configurationTypes, IServiceCollectionRegistrar serviceCollectionRegistrar)
         {
             _storage = storage ?? throw new ArgumentNullException(nameof(storage));
             _deserializer = deserializer ?? throw new ArgumentNullException(nameof(deserializer));
-
+            _serviceCollectionRegistrar = serviceCollectionRegistrar;
             if (configurationTypes == null || configurationTypes.Count == 0)
                 throw new ArgumentException("Configuration types are not set");
             else
@@ -73,6 +74,20 @@ namespace FuncatConfiguration
         public Task<T> GetConfigurationAsync<T>(CancellationToken cancellationToken)
         {
             return GetConfigurationAsync<T>(typeof(T).Name, cancellationToken);
+        }
+
+        /// <summary>
+        /// Register all types in DI container
+        /// </summary>
+        internal void RegisterTypesInDI()
+        {
+            if (_serviceCollectionRegistrar != null)
+            {
+                foreach (var type in _configurationTypes.Where(x => x.Value.RegisterInServiceCollection))
+                {
+                    type.Value.
+                }
+            }
         }
 
         private async Task<T> LoadConfigurationAsync<T>(string name, CancellationToken cancellationToken)

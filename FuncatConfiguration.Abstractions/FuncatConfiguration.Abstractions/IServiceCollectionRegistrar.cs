@@ -12,6 +12,6 @@ namespace FuncatConfiguration.Abstractions
         /// </summary>
         /// <typeparam name="T">Configuration type</typeparam>
         /// <param name="configurationFactory">Configuration factory</param>
-        void Register<T>(Func<T> configurationFactory);
+        void Register(Type configurationType, Func<object> configurationFactory);
     }
 }

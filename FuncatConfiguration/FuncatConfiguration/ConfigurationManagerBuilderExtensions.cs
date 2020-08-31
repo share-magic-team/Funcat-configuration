@@ -45,9 +45,9 @@ namespace FuncatConfiguration
         /// <param name="configurationName">Name of configuration</param>
         /// <param name="cacheConfiguration">If true - cache configuration instance, else - load configuration from storage every time</param>
         /// <returns>Builder</returns>
-        public static ConfigurationManagerBuilder WithConfigurationType(this ConfigurationManagerBuilder builder, Type configurationType, string configurationName, bool cacheConfiguration = true)
+        public static ConfigurationManagerBuilder WithConfigurationType(this ConfigurationManagerBuilder builder, Type configurationType, string configurationName, bool cacheConfiguration = true, bool registerInServiceCollection = true)
         {
-            builder.ConfigurationTypeInfos.Add(configurationName, new ConfigurationTypeInfo(configurationName, configurationType, cacheConfiguration));
+            builder.ConfigurationTypeInfos.Add(configurationName, new ConfigurationTypeInfo(configurationName, configurationType, cacheConfiguration, registerInServiceCollection));
             return builder;
         }
 
@@ -59,9 +59,9 @@ namespace FuncatConfiguration
         /// <param name="configurationName">Name of configuration</param>
         /// <param name="cacheConfiguration">If true - cache configuration instance, else - load configuration from storage every time</param>
         /// <returns>Builder</returns>
-        public static ConfigurationManagerBuilder WithConfigurationType<T>(this ConfigurationManagerBuilder builder, string configurationName, bool cacheConfiguration = true)
+        public static ConfigurationManagerBuilder WithConfigurationType<T>(this ConfigurationManagerBuilder builder, string configurationName, bool cacheConfiguration = true, bool registerInServiceCollection = true)
         {
-            builder.ConfigurationTypeInfos.Add(configurationName, new ConfigurationTypeInfo(configurationName, typeof(T), cacheConfiguration));
+            builder.ConfigurationTypeInfos.Add(configurationName, new ConfigurationTypeInfo(configurationName, typeof(T), cacheConfiguration, registerInServiceCollection));
             return builder;
         }
 
@@ -72,9 +72,9 @@ namespace FuncatConfiguration
         /// <param name="builder">Builder</param>
         /// <param name="cacheConfiguration">If true - cache configuration instance, else - load configuration from storage every time</param>
         /// <returns>Builder</returns>
-        public static ConfigurationManagerBuilder WithConfigurationType<T>(this ConfigurationManagerBuilder builder, bool cacheConfiguration = true)
+        public static ConfigurationManagerBuilder WithConfigurationType<T>(this ConfigurationManagerBuilder builder, bool cacheConfiguration = true, bool registerInServiceCollection = true)
         {
-            builder.ConfigurationTypeInfos.Add(typeof(T).Name, new ConfigurationTypeInfo(typeof(T), cacheConfiguration));
+            builder.ConfigurationTypeInfos.Add(typeof(T).Name, new ConfigurationTypeInfo(typeof(T), cacheConfiguration, registerInServiceCollection));
             return builder;
         }
 
