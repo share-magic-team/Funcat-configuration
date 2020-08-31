@@ -23,6 +23,7 @@ namespace FuncatConfiguration
             {
                 if (builder.Deserializer == null)
                     throw new InvalidOperationException("Deserializer not set");
+
                 if (builder.Storage == null)
                     throw new InvalidOperationException("Storage not set");
 
@@ -85,6 +86,12 @@ namespace FuncatConfiguration
         /// <returns>Builder</returns>
         public static ConfigurationManagerBuilder WithDeserializer(this ConfigurationManagerBuilder builder, IDeserializer deserializer)
         {
+            if (deserializer is null)
+                throw new ArgumentNullException(nameof(deserializer));
+
+            if (builder.Deserializer != null)
+                throw new InvalidOperationException("Deserializer already set");
+
             builder.Deserializer = deserializer;
             return builder;
         }
@@ -97,6 +104,12 @@ namespace FuncatConfiguration
         /// <returns>Builder</returns>
         public static ConfigurationManagerBuilder WithStorage(this ConfigurationManagerBuilder builder, IStorage storage)
         {
+            if (storage is null)
+                throw new ArgumentNullException(nameof(storage));
+
+            if (builder.Storage != null)
+                throw new InvalidOperationException("Storage already set");
+
             builder.Storage = storage;
             return builder;
         }
