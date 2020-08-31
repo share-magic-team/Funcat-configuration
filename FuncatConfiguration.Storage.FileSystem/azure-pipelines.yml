@@ -30,21 +30,16 @@ stages:
         projects: '$(System.DefaultWorkingDirectory)/FuncatConfiguration.Storage.FileSystem/*.sln'
         feedsToUse: 'select'
 
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'test'
+        projects: '$(System.DefaultWorkingDirectory)/FuncatConfiguration.Storage.FileSystem/FuncatConfiguration.Storage.FileSystem.Tests/FuncatConfiguration.Storage.FileSystem.Tests.csproj'
+
     - task: MSBuild@1
       inputs:
         solution: $(System.DefaultWorkingDirectory)/FuncatConfiguration.Storage.FileSystem/*.sln
         configuration: Release
         msbuildArguments: /p:DeployOnBuild=true
-
-    - task: VSTest@2
-      inputs:
-        testSelector: 'testAssemblies'
-        testAssemblyVer2: |
-          **\*test*.dll
-          **\*Test*.dll
-          !**\*TestAdapter.dll
-          !**\obj\**
-        searchFolder: '$(System.DefaultWorkingDirectory)'
 
     - task: NuGetCommand@2
       inputs:
