@@ -10,7 +10,7 @@ namespace FuncatConfiguration.Abstractions
         /// <summary>
         /// Register type in DI container
         /// </summary>
-        /// <typeparam name="T">Configuration type</typeparam>
+        /// <param name="configurationType">Configuration type</typeparam>
         /// <param name="configurationFactory">Configuration factory</param>
         void Register(Type configurationType, Func<object> configurationFactory);
     }
