@@ -30,6 +30,12 @@ stages:
         projects: '$(System.DefaultWorkingDirectory)/FuncatConfiguration.Storage.FileSystem/*.sln'
         feedsToUse: 'select'
 
+    - task: FileTransform@1
+      inputs:
+        folderPath: '$(System.DefaultWorkingDirectory)/FuncatConfiguration.Storage.FileSystem.Tests/'
+        fileType: json
+        targetFiles: 'application.json'
+
     - task: MSBuild@1
       inputs:
         solution: $(System.DefaultWorkingDirectory)/FuncatConfiguration.Storage.FileSystem/*.sln
