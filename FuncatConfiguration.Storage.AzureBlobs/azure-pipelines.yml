@@ -36,6 +36,11 @@ stages:
         fileType: json
         targetFiles: 'application.json'
 
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'test'
+        projects: '$(System.DefaultWorkingDirectory)/FuncatConfiguration.Storage.AzureBlobs/FuncatConfiguration.Storage.AzureBlobs.Tests/FuncatConfiguration.Storage.AzureBlobs.Tests.csproj'
+
     - task: MSBuild@1
       inputs:
         solution: $(System.DefaultWorkingDirectory)/FuncatConfiguration.Storage.AzureBlobs/*.sln
@@ -51,6 +56,7 @@ stages:
           !**\*TestAdapter.dll
           !**\obj\**
         searchFolder: '$(System.DefaultWorkingDirectory)'
+        
 
     - task: NuGetCommand@2
       inputs:
