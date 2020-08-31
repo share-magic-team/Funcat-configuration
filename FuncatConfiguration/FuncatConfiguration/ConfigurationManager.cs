@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using FuncatConfiguration.Abstractions;
 
 namespace FuncatConfiguration
 {
@@ -83,9 +82,9 @@ namespace FuncatConfiguration
         {
             if (_serviceCollectionRegistrar != null)
             {
-                foreach (var type in _configurationTypes.Where(x => x.Value.RegisterInServiceCollection))
+                foreach (var info in _configurationTypes.Where(x => x.Value.RegisterInServiceCollection))
                 {
-                    type.Value.
+                    _serviceCollectionRegistrar.Register(info.Value.Type,
                 }
             }
         }
