@@ -1,5 +1,5 @@
 Nuget packages: 
-(FuncatConfiguration)[https://www.nuget.org/packages/FuncatConfiguration] - base package
+[FuncatConfiguration](https://www.nuget.org/packages/FuncatConfiguration) - base package
 (FuncatConfiguration.Abstractions)[https://www.nuget.org/packages/FuncatConfiguration.Abstractions] - package with storage and serialization abstractions
 (FuncatConfiguration.Deserializer.Json)[https://www.nuget.org/packages/FuncatConfiguration.Deserializer.Json] - json deserializer
 (FuncatConfiguration.DI.MicrosoftDependencyInjection)[https://www.nuget.org/packages/FuncatConfiguration.DI.MicrosoftDependencyInjection] - Microsoft DI extension to register configuration types in container
