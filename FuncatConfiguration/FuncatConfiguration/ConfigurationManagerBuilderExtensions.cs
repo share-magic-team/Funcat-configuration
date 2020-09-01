@@ -29,7 +29,11 @@ namespace FuncatConfiguration
 
                 await builder.Storage.InitializeAsync(cancellationToken);
 
-                return new ConfigurationManager(builder.Storage, builder.Deserializer, new ReadOnlyDictionary<string, ConfigurationTypeInfo>(builder.ConfigurationTypeInfos), builder.ServiceCollectionRegistrar);
+                var manager = new ConfigurationManager(builder.Storage, builder.Deserializer, new ReadOnlyDictionary<string, ConfigurationTypeInfo>(builder.ConfigurationTypeInfos), builder.ServiceCollectionRegistrar);
+
+                manager.RegisterTypesInDI();
+
+                return manager;
             }
             catch (Exception e)
             {

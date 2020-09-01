@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using FuncatConfiguration.Abstractions;
@@ -17,9 +18,9 @@ namespace FuncatConfiguration.Deserializer.Json
                 JsonSerializer.Create(settings);
         }
 
-        public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken)
+        public Task<object> DeserializeAsync(Type configurationType, Stream stream, CancellationToken cancellationToken)
         {
-            return Task.FromResult(_serializer.Deserialize<T>(new JsonTextReader(new StreamReader(stream))));
+            return Task.FromResult(_serializer.Deserialize(new JsonTextReader(new StreamReader(stream)), configurationType));
         }
     }
 }

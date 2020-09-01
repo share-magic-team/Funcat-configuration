@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using FuncatConfiguration.Abstractions;
@@ -8,9 +9,9 @@ namespace FuncatConfiguration.Tests.Mocks
 {
     internal class MockDeserializer : IDeserializer
     {
-        public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken)
+        public Task<object> DeserializeAsync(Type configurationType, Stream stream, CancellationToken cancellationToken)
         {
-            return Task.FromResult(JsonSerializer.Create().Deserialize<T>(new JsonTextReader(new StreamReader(stream))));
+            return Task.FromResult(JsonSerializer.Create().Deserialize(new JsonTextReader(new StreamReader(stream)), configurationType));
         }
     }
 }
