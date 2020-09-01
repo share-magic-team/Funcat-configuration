@@ -1,5 +1,6 @@
 using System.Threading;
 using FuncatConfiguration.Deserializer.Json;
+using FuncatConfiguration.DI.MicrosoftDependencyInjection;
 using FuncatConfiguration.Examples.Configurations;
 using FuncatConfiguration.Storage.FileSystem;
 using Microsoft.AspNetCore.Builder;
@@ -12,8 +13,6 @@ namespace FuncatConfiguration.Examples.FileSystemStorage
 {
     public class Startup
     {
-        private ConfigurationManager _configurationManager;
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -39,20 +38,20 @@ namespace FuncatConfiguration.Examples.FileSystemStorage
             {
                 endpoints.MapControllers();
             });
+        }
 
-            _configurationManager = ConfigurationManagerBuilder
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            var configurationManager = ConfigurationManagerBuilder
                 .Create()
                 .WithConfigurationType<SomeServiceConnectionSettings>() // Register SomeServiceConnectionSettings class as configuration class
                 .WithConfigurationType<AnotherServiceConnectionSettings>() // Register SomeServiceConnectionSettings class as configuration class
                 .WithJsonDeserializer() // Register Json serializer -- any deserializer registration required
                 .WithFileSystemStorage(folder: "ProdConfigurations") // User file system as storage for configurations -- any storage registration required
                 .BuildAsync(CancellationToken.None).Result;
-        }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddConfigurationTypes(_configurationManager);
+            services.AddConfigurationTypes(configurationManager);
             services.AddControllers();
         }
     }
