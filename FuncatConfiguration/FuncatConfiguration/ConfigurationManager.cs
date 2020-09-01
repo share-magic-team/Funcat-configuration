@@ -41,11 +41,11 @@ namespace FuncatConfiguration
         /// <summary>
         /// Get configuration instance
         /// </summary>
-        /// <typeparam name="T">Configuration type</typeparam>
         /// <param name="name">Configration name</param>
+        /// <param name="configurationType">Configuration type</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task with configuration instance</returns>
-        public async Task<T> GetConfigurationAsync<T>(string name, CancellationToken cancellationToken)
+        public async Task<object> GetConfigurationAsync(string name, Type configurationType, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Configuration name not set", nameof(name));
@@ -54,14 +54,26 @@ namespace FuncatConfiguration
                 throw new InvalidOperationException($"Configuration not registered: [{name}]");
 
             if (info.CacheConfiguration && _cache.TryGetValue(name, out var conf1))
-                return (T)conf1;
+                return conf1;
 
-            var conf2 = await LoadConfigurationAsync<T>(name, cancellationToken);
+            var conf2 = await LoadConfigurationAsync(configurationType, name, cancellationToken);
 
             if (info.CacheConfiguration)
                 _cache.Add(name, conf2);
 
             return conf2;
+        }
+
+        /// <summary>
+        /// Get configuration instance
+        /// </summary>
+        /// <typeparam name="T">Configuration type</typeparam>
+        /// <param name="name">Configration name</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Task with configuration instance</returns>
+        public async Task<T> GetConfigurationAsync<T>(string name, CancellationToken cancellationToken)
+        {
+            return (T)await GetConfigurationAsync(name, typeof(T), cancellationToken);
         }
 
         /// <summary>
@@ -82,17 +94,19 @@ namespace FuncatConfiguration
         {
             if (_serviceCollectionRegistrar != null)
             {
-                foreach (var info in _configurationTypes.Where(x => x.Value.RegisterInServiceCollection))
+                foreach (var configurationTypeInfo in _configurationTypes.Values.Where(x => x.RegisterInServiceCollection))
                 {
-                    _serviceCollectionRegistrar.Register(info.Value.Type,
+                    _serviceCollectionRegistrar.Register(
+                        configurationTypeInfo.Type,
+                        () => GetConfigurationAsync(configurationTypeInfo.Name, configurationTypeInfo.Type, CancellationToken.None).Result);
                 }
             }
         }
 
-        private async Task<T> LoadConfigurationAsync<T>(string name, CancellationToken cancellationToken)
+        private async Task<object> LoadConfigurationAsync(Type configurationType, string name, CancellationToken cancellationToken)
         {
             using (var stream = await _storage.GetConfigStreamAsync(name, cancellationToken))
-                return await _deserializer.DeserializeAsync<T>(stream, cancellationToken);
+                return await _deserializer.DeserializeAsync(configurationType, stream, cancellationToken);
         }
     }
 }
