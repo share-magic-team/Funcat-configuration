@@ -11,7 +11,7 @@ namespace FuncatConfiguration.DI.MicrosoftDependencyInjection
         /// <param name="serviceCollection">Service collection for services registration</param>
         /// <param name="configurationManager">Funcat configuration manager</param>
         /// <returns>Service collection</returns>
-        public static IServiceCollection RegisterConfigurationTypes(this IServiceCollection serviceCollection, ConfigurationManager configurationManager)
+        public static IServiceCollection AddConfigurationTypes(this IServiceCollection serviceCollection, ConfigurationManager configurationManager)
         {
             foreach (var info in configurationManager.GetConfigurationTypeInfos())
             {

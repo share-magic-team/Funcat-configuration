@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FuncatConfiguration" Version="1.0.7" />
+    <PackageReference Include="FuncatConfiguration" Version="1.0.8" />
     <PackageReference Include="FuncatConfiguration.Deserializer.Json" Version="1.0.7" />
-    <PackageReference Include="FuncatConfiguration.DI.MicrosoftDependencyInjection" Version="1.0.0" />
+    <PackageReference Include="FuncatConfiguration.DI.MicrosoftDependencyInjection" Version="1.0.8.1" />
     <PackageReference Include="FuncatConfiguration.Storage.AzureBlobs" Version="1.0.7" />
   </ItemGroup>
 

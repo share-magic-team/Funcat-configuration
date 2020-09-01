@@ -1,6 +1,5 @@
 using System.Threading;
 using FuncatConfiguration.Deserializer.Json;
-using FuncatConfiguration.DI.MicrosoftDependencyInjection;
 using FuncatConfiguration.Examples.Configurations;
 using FuncatConfiguration.Storage.AzureBlobs;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +12,8 @@ namespace FuncatConfiguration.Examples.AzureBlobsStorage
 {
     public class Startup
     {
+        private ConfigurationManager _configurationManager;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -38,22 +39,22 @@ namespace FuncatConfiguration.Examples.AzureBlobsStorage
             {
                 endpoints.MapControllers();
             });
+
+            var azureBlobsConnectionString = Configuration.GetConnectionString("AzureBlobsConnectionString");
+
+            _configurationManager = ConfigurationManagerBuilder
+                .Create()
+                .WithConfigurationType<SomeServiceConnectionSettings>() // Register SomeServiceConnectionSettings class as configuration class
+                .WithConfigurationType<AnotherServiceConnectionSettings>() // Register SomeServiceConnectionSettings class as configuration class
+                .WithJsonDeserializer() // Register Json serializer -- any deserializer registration required
+                .WithAzureBlobsStorage(azureBlobsConnectionString, containerName: "testconfigs", "production") // User azure blobs as storage for configurations -- any storage registration required
+                .BuildAsync(CancellationToken.None).Result;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var azureBlobsConnectionString = Configuration.GetConnectionString("AzureBlobsConnectionString");
-
-            var configurationManager = ConfigurationManagerBuilder
-                .Create()
-                .WithConfigurationType<SomeServiceConnectionSettings>() // Register SomeServiceConnectionSettings class as configuration class
-                .WithConfigurationType<AnotherServiceConnectionSettings>() // Register SomeServiceConnectionSettings class as configuration class
-                .WithJsonDeserializer() // Register Json serializer -- any deserializer registration required
-                .WithMicrosoftDI(services) // Register configurations in Microsoft DI -- optional
-                .WithAzureBlobsStorage(azureBlobsConnectionString, containerName: "testconfigs", "production") // User azure blobs as storage for configurations -- any storage registration required
-                .BuildAsync(CancellationToken.None).Result;
-
+            services.AddConfigurationTypes(_configurationManager);
             services.AddControllers();
         }
     }
