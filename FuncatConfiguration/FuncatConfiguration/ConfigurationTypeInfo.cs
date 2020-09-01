@@ -2,7 +2,7 @@
 
 namespace FuncatConfiguration
 {
-    internal class ConfigurationTypeInfo
+    public class ConfigurationTypeInfo
     {
         public ConfigurationTypeInfo(string name, Type type, bool cacheConfiguration, bool registerInServiceCollection)
         {
@@ -22,8 +22,8 @@ namespace FuncatConfiguration
         }
 
         public bool CacheConfiguration { get; }
-        public string Name { get; set; }
+        public string Name { get; }
         public bool RegisterInServiceCollection { get; }
-        public Type Type { get; set; }
+        public Type Type { get; }
     }
 }

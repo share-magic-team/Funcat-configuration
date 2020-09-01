@@ -2,7 +2,7 @@
 
 namespace FuncatConfiguration.DI.MicrosoftDependencyInjection
 {
-    public static class ConfigurationManagerBuilderExtensions
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
         /// Use Microsoft dependency injection as DI container for configurations
@@ -10,9 +10,10 @@ namespace FuncatConfiguration.DI.MicrosoftDependencyInjection
         /// <param name="builder"></param>
         /// <param name="serviceCollection">Service collection for services registration</param>
         /// <returns>Builder</returns>
-        public static ConfigurationManagerBuilder WithMicrosoftDI(this ConfigurationManagerBuilder builder, IServiceCollection serviceCollection)
+        public static IServiceCollection RegisterConfigurationTypes(this IServiceCollection serviceCollection, ConfigurationManager configurationManager)
         {
-            return builder.WithServiceCollectionRegistrar(new MicrosoftDIRegistrar(serviceCollection));
+            // Some actions
+            return serviceCollection;
         }
     }
 }

@@ -17,8 +17,6 @@ namespace FuncatConfiguration
 
         internal IDeserializer Deserializer { get; set; }
 
-        internal IServiceCollectionRegistrar ServiceCollectionRegistrar { get; set; }
-
         internal IStorage Storage { get; set; }
 
         public static ConfigurationManagerBuilder Create() => new ConfigurationManagerBuilder();

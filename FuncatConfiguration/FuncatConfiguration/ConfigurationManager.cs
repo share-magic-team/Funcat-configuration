@@ -16,27 +16,16 @@ namespace FuncatConfiguration
         private readonly Dictionary<string, object> _cache = new Dictionary<string, object>();
         private readonly ReadOnlyDictionary<string, ConfigurationTypeInfo> _configurationTypes;
         private readonly IDeserializer _deserializer;
-        private readonly IServiceCollectionRegistrar _serviceCollectionRegistrar;
         private readonly IStorage _storage;
 
-        internal ConfigurationManager(IStorage storage, IDeserializer deserializer, ReadOnlyDictionary<string, ConfigurationTypeInfo> configurationTypes, IServiceCollectionRegistrar serviceCollectionRegistrar)
+        internal ConfigurationManager(IStorage storage, IDeserializer deserializer, ReadOnlyDictionary<string, ConfigurationTypeInfo> configurationTypes)
         {
             _storage = storage ?? throw new ArgumentNullException(nameof(storage));
             _deserializer = deserializer ?? throw new ArgumentNullException(nameof(deserializer));
-            _serviceCollectionRegistrar = serviceCollectionRegistrar;
             if (configurationTypes == null || configurationTypes.Count == 0)
                 throw new ArgumentException("Configuration types are not set");
             else
                 _configurationTypes = configurationTypes;
-        }
-
-        /// <summary>
-        /// Returns array of available configuration types
-        /// </summary>
-        /// <returns>Array of configuration types</returns>
-        public Type[] GetAvailableConfigurationTypes()
-        {
-            return _configurationTypes.Select(x => x.Value.Type).ToArray();
         }
 
         /// <summary>
@@ -89,19 +78,12 @@ namespace FuncatConfiguration
         }
 
         /// <summary>
-        /// Register all types in DI container
+        /// Returns array of available configuration types
         /// </summary>
-        internal void RegisterTypesInDI()
+        /// <returns>Array of configuration types</returns>
+        public ConfigurationTypeInfo[] GetConfigurationTypeInfos()
         {
-            if (_serviceCollectionRegistrar != null)
-            {
-                foreach (var configurationTypeInfo in _configurationTypes.Values.Where(x => x.RegisterInServiceCollection))
-                {
-                    _serviceCollectionRegistrar.Register(
-                        configurationTypeInfo.Type,
-                        () => GetConfigurationAsync(configurationTypeInfo.Name, configurationTypeInfo.Type, CancellationToken.None).Result);
-                }
-            }
+            return _configurationTypes.Values.ToArray();
         }
 
         private async Task<object> LoadConfigurationAsync(Type configurationType, string name, CancellationToken cancellationToken)

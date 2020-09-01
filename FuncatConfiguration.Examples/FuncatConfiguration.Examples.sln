@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncatConfiguration.Examples.FileSystemStorage", "FuncatConfiguration.Examples.FileSystemStorage\FuncatConfiguration.Examples.FileSystemStorage.csproj", "{D2CC1170-13E8-4EBC-A367-8EC337DFA053}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncatConfiguration.Examples.AzureBlobsStorage", "FuncatConfiguration.Examples.AzureBlobsStorage\FuncatConfiguration.Examples.AzureBlobsStorage.csproj", "{709FB4B9-E059-449A-9FC1-D885D52D5678}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncatConfiguration.Examples.Configurations", "FuncatConfiguration.Examples.Configurations\FuncatConfiguration.Examples.Configurations.csproj", "{76F088A4-EA00-469B-A066-5EFE1EA524A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2CC1170-13E8-4EBC-A367-8EC337DFA053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2CC1170-13E8-4EBC-A367-8EC337DFA053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2CC1170-13E8-4EBC-A367-8EC337DFA053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2CC1170-13E8-4EBC-A367-8EC337DFA053}.Release|Any CPU.Build.0 = Release|Any CPU
+		{709FB4B9-E059-449A-9FC1-D885D52D5678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709FB4B9-E059-449A-9FC1-D885D52D5678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709FB4B9-E059-449A-9FC1-D885D52D5678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709FB4B9-E059-449A-9FC1-D885D52D5678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76F088A4-EA00-469B-A066-5EFE1EA524A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76F088A4-EA00-469B-A066-5EFE1EA524A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76F088A4-EA00-469B-A066-5EFE1EA524A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76F088A4-EA00-469B-A066-5EFE1EA524A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5028A452-4BA5-47BB-B15A-D83A49BC23B1}
+	EndGlobalSection
+EndGlobal
