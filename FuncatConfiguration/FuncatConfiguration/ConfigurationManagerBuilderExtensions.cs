@@ -72,12 +72,9 @@ namespace FuncatConfiguration
         /// <param name="builder">Builder</param>
         /// <param name="cacheConfiguration">If true - cache configuration instance, else - load configuration from storage every time</param>
         /// <returns>Builder</returns>
-        public static ConfigurationManagerBuilder WithConfigurationType<T>(this ConfigurationManagerBuilder builder, bool cacheConfiguration = true, bool registerInServiceCollection = true, bool trimConfigurationNamePostfix = true)
+        public static ConfigurationManagerBuilder WithConfigurationType<T>(this ConfigurationManagerBuilder builder, bool cacheConfiguration = true, bool registerInServiceCollection = true)
         {
-            var name = typeof(T).Name;
-
-            if (trimConfigurationNamePostfix)
-                name = Utils.TransformConfigurationName(name);
+            var name = Utils.TransformConfigurationTypeName(typeof(T).Name);
 
             builder.ConfigurationTypeInfos.Add(name, new ConfigurationTypeInfo(typeof(T), cacheConfiguration, registerInServiceCollection));
             return builder;

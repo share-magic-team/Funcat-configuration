@@ -4,7 +4,7 @@ namespace FuncatConfiguration
 {
     internal static class Utils
     {
-        public static string TransformConfigurationName(string configurationName)
+        public static string TransformConfigurationTypeName(string configurationName)
         {
             const string configuration = "configuration";
             if (configurationName.Equals(configuration, StringComparison.InvariantCultureIgnoreCase))
