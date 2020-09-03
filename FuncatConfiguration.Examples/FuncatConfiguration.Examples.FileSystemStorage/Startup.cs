@@ -51,6 +51,9 @@ namespace FuncatConfiguration.Examples.FileSystemStorage
                 .WithFileSystemStorage(folder: "ProdConfigurations") // User file system as storage for configurations -- any storage registration required
                 .BuildAsync(CancellationToken.None).Result;
 
+            // Get config explicitly
+            var someServiceConfig = configurationManager.GetConfigurationAsync<SomeServiceConnectionSettings>(CancellationToken.None).Result;
+
             services.AddConfigurationTypes(configurationManager);
             services.AddControllers();
         }

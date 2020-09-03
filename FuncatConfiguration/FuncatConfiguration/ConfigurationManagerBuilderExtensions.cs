@@ -72,9 +72,14 @@ namespace FuncatConfiguration
         /// <param name="builder">Builder</param>
         /// <param name="cacheConfiguration">If true - cache configuration instance, else - load configuration from storage every time</param>
         /// <returns>Builder</returns>
-        public static ConfigurationManagerBuilder WithConfigurationType<T>(this ConfigurationManagerBuilder builder, bool cacheConfiguration = true, bool registerInServiceCollection = true)
+        public static ConfigurationManagerBuilder WithConfigurationType<T>(this ConfigurationManagerBuilder builder, bool cacheConfiguration = true, bool registerInServiceCollection = true, bool trimConfigurationNamePostfix = true)
         {
-            builder.ConfigurationTypeInfos.Add(typeof(T).Name, new ConfigurationTypeInfo(typeof(T), cacheConfiguration, registerInServiceCollection));
+            var name = typeof(T).Name;
+
+            if (trimConfigurationNamePostfix)
+                name = TransformName(name);
+
+            builder.ConfigurationTypeInfos.Add(name, new ConfigurationTypeInfo(typeof(T), cacheConfiguration, registerInServiceCollection));
             return builder;
         }
 
@@ -112,6 +117,16 @@ namespace FuncatConfiguration
 
             builder.Storage = storage;
             return builder;
+        }
+
+        private static string TransformName(string name)
+        {
+            const string configuration = "configuration";
+            if (name.Equals(configuration, StringComparison.InvariantCultureIgnoreCase))
+                return name;
+            if (name.EndsWith(configuration, StringComparison.InvariantCultureIgnoreCase))
+                return name.Substring(0, name.Length - configuration.Length);
+            return name;
         }
     }
 }
