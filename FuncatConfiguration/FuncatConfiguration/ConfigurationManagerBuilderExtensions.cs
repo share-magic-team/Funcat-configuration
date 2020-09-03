@@ -77,7 +77,7 @@ namespace FuncatConfiguration
             var name = typeof(T).Name;
 
             if (trimConfigurationNamePostfix)
-                name = TransformName(name);
+                name = Utils.TransformConfigurationName(name);
 
             builder.ConfigurationTypeInfos.Add(name, new ConfigurationTypeInfo(typeof(T), cacheConfiguration, registerInServiceCollection));
             return builder;
@@ -117,16 +117,6 @@ namespace FuncatConfiguration
 
             builder.Storage = storage;
             return builder;
-        }
-
-        private static string TransformName(string name)
-        {
-            const string configuration = "configuration";
-            if (name.Equals(configuration, StringComparison.InvariantCultureIgnoreCase))
-                return name;
-            if (name.EndsWith(configuration, StringComparison.InvariantCultureIgnoreCase))
-                return name.Substring(0, name.Length - configuration.Length);
-            return name;
         }
     }
 }

@@ -74,7 +74,7 @@ namespace FuncatConfiguration
         /// <returns>Task with configuration instance</returns>
         public Task<T> GetConfigurationAsync<T>(CancellationToken cancellationToken)
         {
-            return GetConfigurationAsync<T>(typeof(T).Name, cancellationToken);
+            return GetConfigurationAsync<T>(Utils.TransformConfigurationName(typeof(T).Name), cancellationToken);
         }
 
         /// <summary>
