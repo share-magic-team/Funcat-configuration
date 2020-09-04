@@ -7,10 +7,10 @@ namespace FuncatConfiguration.Examples.FileSystemStorage.Controllers
     [Route("[controller]")]
     public class TestController : ControllerBase
     {
-        private readonly AnotherServiceConnectionSettings _anotherServiceConnectionSettings;
+        private readonly AnotherServiceConnectionConfiguration _anotherServiceConnectionSettings;
         private readonly SomeServiceConnectionSettings _someServiceConnectionSettings;
 
-        public TestController(SomeServiceConnectionSettings someServiceConnectionSettings, AnotherServiceConnectionSettings anotherServiceConnectionSettings)
+        public TestController(SomeServiceConnectionSettings someServiceConnectionSettings, AnotherServiceConnectionConfiguration anotherServiceConnectionSettings)
         {
             _someServiceConnectionSettings = someServiceConnectionSettings;
             _anotherServiceConnectionSettings = anotherServiceConnectionSettings;

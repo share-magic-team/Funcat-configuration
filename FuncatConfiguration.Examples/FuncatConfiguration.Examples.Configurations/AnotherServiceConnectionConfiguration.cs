@@ -1,6 +1,6 @@
 ﻿namespace FuncatConfiguration.Examples.Configurations
 {
-    public class AnotherServiceConnectionSettings
+    public class AnotherServiceConnectionConfiguration
     {
         public string BasicAuthLogin { get; set; }
         public string BasicAuthPassword { get; set; }

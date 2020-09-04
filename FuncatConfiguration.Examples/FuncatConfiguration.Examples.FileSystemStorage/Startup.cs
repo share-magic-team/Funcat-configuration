@@ -46,13 +46,14 @@ namespace FuncatConfiguration.Examples.FileSystemStorage
             var configurationManager = ConfigurationManagerBuilder
                 .Create()
                 .WithConfigurationType<SomeServiceConnectionSettings>() // Register SomeServiceConnectionSettings class as configuration class
-                .WithConfigurationType<AnotherServiceConnectionSettings>() // Register SomeServiceConnectionSettings class as configuration class
+                .WithConfigurationType<AnotherServiceConnectionConfiguration>() // Register SomeServiceConnectionSettings class as configuration class
                 .WithJsonDeserializer() // Register Json serializer -- any deserializer registration required
                 .WithFileSystemStorage(folder: "ProdConfigurations") // User file system as storage for configurations -- any storage registration required
                 .BuildAsync(CancellationToken.None).Result;
 
             // Get config explicitly
             var someServiceConfig = configurationManager.GetConfigurationAsync<SomeServiceConnectionSettings>(CancellationToken.None).Result;
+            var anotherServiceConfig = configurationManager.GetConfigurationAsync<AnotherServiceConnectionConfiguration>("AnotherServiceConnection", CancellationToken.None).Result;
 
             services.AddConfigurationTypes(configurationManager);
             services.AddControllers();

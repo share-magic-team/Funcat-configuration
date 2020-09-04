@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="ProdConfigurations\anotherServiceConnectionSettings.json" />
+    <Content Remove="ProdConfigurations\anotherServiceConnection.json" />
     <Content Remove="ProdConfigurations\someServiceConnectionSettings.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="ProdConfigurations\anotherServiceConnectionSettings.json">
+    <None Include="ProdConfigurations\anotherServiceConnection.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ProdConfigurations\someServiceConnectionSettings.json">
@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FuncatConfiguration" Version="1.0.8" />
+    <PackageReference Include="FuncatConfiguration" Version="1.0.8.2" />
     <PackageReference Include="FuncatConfiguration.Deserializer.Json" Version="1.0.7" />
-    <PackageReference Include="FuncatConfiguration.DI.MicrosoftDependencyInjection" Version="1.0.8.1" />
+    <PackageReference Include="FuncatConfiguration.DI.MicrosoftDependencyInjection" Version="1.0.8.2" />
     <PackageReference Include="FuncatConfiguration.Storage.FileSystem" Version="1.0.7" />
   </ItemGroup>
 

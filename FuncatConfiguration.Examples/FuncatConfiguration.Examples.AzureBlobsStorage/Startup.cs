@@ -48,7 +48,7 @@ namespace FuncatConfiguration.Examples.AzureBlobsStorage
             var configurationManager = ConfigurationManagerBuilder
                 .Create()
                 .WithConfigurationType<SomeServiceConnectionSettings>() // Register SomeServiceConnectionSettings class as configuration class
-                .WithConfigurationType<AnotherServiceConnectionSettings>() // Register SomeServiceConnectionSettings class as configuration class
+                .WithConfigurationType<AnotherServiceConnectionConfiguration>() // Register SomeServiceConnectionSettings class as configuration class
                 .WithJsonDeserializer() // Register Json serializer -- any deserializer registration required
                 .WithAzureBlobsStorage(azureBlobsConnectionString, containerName: "testconfigs", "production") // User azure blobs as storage for configurations -- any storage registration required
                 .BuildAsync(CancellationToken.None).Result;
