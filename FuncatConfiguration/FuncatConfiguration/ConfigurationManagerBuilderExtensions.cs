@@ -76,7 +76,7 @@ namespace FuncatConfiguration
         {
             var name = Utils.TransformConfigurationTypeName(typeof(T).Name);
 
-            builder.ConfigurationTypeInfos.Add(name, new ConfigurationTypeInfo(typeof(T), cacheConfiguration, registerInServiceCollection));
+            builder.ConfigurationTypeInfos.Add(name, new ConfigurationTypeInfo(name, typeof(T), cacheConfiguration, registerInServiceCollection));
             return builder;
         }
 

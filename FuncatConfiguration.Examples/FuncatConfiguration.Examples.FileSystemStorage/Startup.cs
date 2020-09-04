@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using FuncatConfiguration.Deserializer.Json;
 using FuncatConfiguration.DI.MicrosoftDependencyInjection;
@@ -53,7 +54,15 @@ namespace FuncatConfiguration.Examples.FileSystemStorage
 
             // Get config explicitly
             var someServiceConfig = configurationManager.GetConfigurationAsync<SomeServiceConnectionSettings>(CancellationToken.None).Result;
-            var anotherServiceConfig = configurationManager.GetConfigurationAsync<AnotherServiceConnectionConfiguration>("AnotherServiceConnection", CancellationToken.None).Result;
+            var anotherServiceConfig1 = configurationManager.GetConfigurationAsync<AnotherServiceConnectionConfiguration>(CancellationToken.None).Result;
+            var anotherServiceConfig2 = configurationManager.GetConfigurationAsync("AnotherServiceConnection", typeof(AnotherServiceConnectionConfiguration), CancellationToken.None).Result;
+
+            var allConfigs = configurationManager
+                .GetConfigurationTypeInfos()
+                .Select(x =>
+                    configurationManager
+                    .GetConfigurationAsync(x.Name, x.Type, CancellationToken.None).Result)
+                .ToArray();
 
             services.AddConfigurationTypes(configurationManager);
             services.AddControllers();

@@ -9,14 +9,14 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/share-magic-team/Funcat-configuration</PackageProjectUrl>
     <RepositoryUrl>https://github.com/share-magic-team/Funcat-configuration</RepositoryUrl>
-    <Version>1.0.8.2</Version>
-    <AssemblyVersion>1.0.8.2</AssemblyVersion>
-    <FileVersion>1.0.8.2</FileVersion>
+    <Version>1.0.8.3</Version>
+    <AssemblyVersion>1.0.8.3</AssemblyVersion>
+    <FileVersion>1.0.8.3</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FuncatConfiguration.Abstractions" Version="1.0.8" />
-    <PackageReference Include="FuncatConfiguration" Version="1.0.8.2" />
+    <PackageReference Include="FuncatConfiguration" Version="1.0.8.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.7" />
   </ItemGroup>
 

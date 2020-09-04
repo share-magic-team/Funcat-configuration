@@ -16,11 +16,6 @@ namespace FuncatConfiguration
             RegisterInServiceCollection = registerInServiceCollection;
         }
 
-        internal ConfigurationTypeInfo(Type type, bool cacheConfiguration, bool registerInServiceCollection) : this(type.Name, type, cacheConfiguration, registerInServiceCollection)
-        {
-            // Do nothing
-        }
-
         public bool CacheConfiguration { get; }
         public string Name { get; }
         public bool RegisterInServiceCollection { get; }
