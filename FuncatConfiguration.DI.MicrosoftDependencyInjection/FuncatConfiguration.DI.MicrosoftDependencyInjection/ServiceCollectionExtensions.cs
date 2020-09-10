@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace FuncatConfiguration.DI.MicrosoftDependencyInjection
 {
@@ -16,7 +15,7 @@ namespace FuncatConfiguration.DI.MicrosoftDependencyInjection
             foreach (var info in configurationManager.GetConfigurationTypeInfos())
             {
                 if (info.RegisterInServiceCollection)
-                    serviceCollection.AddTransient(info.Type, (_) => configurationManager.GetConfigurationAsync(info.Name, info.Type, CancellationToken.None).Result);
+                    serviceCollection.AddTransient(info.Type, (_) => configurationManager.GetConfiguration(info.Name, info.Type));
             }
             return serviceCollection;
         }
