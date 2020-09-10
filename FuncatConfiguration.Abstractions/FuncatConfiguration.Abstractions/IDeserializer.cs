@@ -15,6 +15,14 @@ namespace FuncatConfiguration.Abstractions
         /// </summary>
         /// <typeparam name="T">Configuration type</typeparam>
         /// <param name="stream">Source of configuration data</param>
+        /// <returns>Configuration data instance</returns>
+        object Deserialize(Type configurationType, Stream stream);
+
+        /// <summary>
+        /// Deserialize configuration from stream into instance of Type
+        /// </summary>
+        /// <typeparam name="T">Configuration type</typeparam>
+        /// <param name="stream">Source of configuration data</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task with configuration data instance</returns>
         Task<object> DeserializeAsync(Type configurationType, Stream stream, CancellationToken cancellationToken);

@@ -13,6 +13,13 @@ namespace FuncatConfiguration.Abstractions
         /// Get configuration data stream by configuration name
         /// </summary>
         /// <param name="configName">Configuration name</param>
+        /// <returns>Configuration data stream</returns>
+        Stream GetConfigStream(string configName);
+
+        /// <summary>
+        /// Get configuration data stream by configuration name
+        /// </summary>
+        /// <param name="configName">Configuration name</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task with configuration data stream</returns>
         Task<Stream> GetConfigStreamAsync(string configName, CancellationToken cancellationToken);
@@ -23,5 +30,10 @@ namespace FuncatConfiguration.Abstractions
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task</returns>
         Task InitializeAsync(CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Initialize configuration data storage
+        /// </summary>
+        void InitializeAsync();
     }
 }
