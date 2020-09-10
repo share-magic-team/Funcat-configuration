@@ -12,7 +12,7 @@ namespace FuncatConfiguration.Tests
     public class Tests
     {
         [TestMethod]
-        public void Should_build_and_get_configs()
+        public void ShoulBuildAndGetConfigs_NonAsync()
         {
             // Arrange
             var builder = ConfigurationManagerBuilder.Create();
@@ -25,11 +25,11 @@ namespace FuncatConfiguration.Tests
                     { "Config1", "{ \"ConnectionString1\": \"connstr1\", \"SomeInteger1\": \"1\" }" },
                     { "Config2", "{ \"ConnectionString2\": \"connstr2\", \"SomeInteger2\": \"2\" }" },
                 }))
-                .BuildAsync(CancellationToken.None).Result;
+                .Build();
 
             // Act
-            var conf1 = manager.GetConfigurationAsync<Config1>(CancellationToken.None).Result;
-            var conf2 = manager.GetConfigurationAsync<Config2>(CancellationToken.None).Result;
+            var conf1 = manager.GetConfiguration<Config1>();
+            var conf2 = manager.GetConfiguration<Config2>();
 
             // Assert
             Assert.AreEqual("connstr1", conf1.ConnectionString1);
@@ -40,7 +40,35 @@ namespace FuncatConfiguration.Tests
         }
 
         [TestMethod]
-        public void Should_fail_build_cause_of_deserializer_not_set()
+        public async Task ShouldBuildAndGetConfigs_Async()
+        {
+            // Arrange
+            var builder = ConfigurationManagerBuilder.Create();
+            var manager = await builder
+                .WithConfigurationType<Config1>(true)
+                .WithConfigurationType<Config2>(true)
+                .WithDeserializer(new MockDeserializer())
+                .WithStorage(new MockStorage(new Dictionary<string, string>
+                {
+                    { "Config1", "{ \"ConnectionString1\": \"connstr1\", \"SomeInteger1\": \"1\" }" },
+                    { "Config2", "{ \"ConnectionString2\": \"connstr2\", \"SomeInteger2\": \"2\" }" },
+                }))
+                .BuildAsync(CancellationToken.None);
+
+            // Act
+            var conf1 = await manager.GetConfigurationAsync<Config1>(CancellationToken.None);
+            var conf2 = await manager.GetConfigurationAsync<Config2>(CancellationToken.None);
+
+            // Assert
+            Assert.AreEqual("connstr1", conf1.ConnectionString1);
+            Assert.AreEqual(1, conf1.SomeInteger1);
+
+            Assert.AreEqual("connstr2", conf2.ConnectionString2);
+            Assert.AreEqual(2, conf2.SomeInteger2);
+        }
+
+        [TestMethod]
+        public void ShouldFailBuildCauseOfDeserializerNotSet()
         {
             var builder = ConfigurationManagerBuilder.Create();
 
@@ -56,7 +84,7 @@ namespace FuncatConfiguration.Tests
         }
 
         [TestMethod]
-        public async Task Should_fail_build_cause_of_storage_not_set()
+        public async Task ShouldFailBuildCauseOfStorageNotSet()
         {
             var builder = ConfigurationManagerBuilder.Create();
 
@@ -68,7 +96,7 @@ namespace FuncatConfiguration.Tests
         }
 
         [TestMethod]
-        public async Task Should_fail_build_cause_of_zero_config_count()
+        public async Task ShouldFailBuildCauseOfZeroConfigCount()
         {
             var builder = ConfigurationManagerBuilder.Create();
 
