@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Threading;
 using FuncatConfiguration.Deserializer.Json;
 using FuncatConfiguration.DI.MicrosoftDependencyInjection;
 using FuncatConfiguration.Examples.Configurations;
@@ -50,18 +49,15 @@ namespace FuncatConfiguration.Examples.FileSystemStorage
                 .WithConfigurationType<AnotherServiceConnectionConfiguration>() // Register SomeServiceConnectionSettings class as configuration class
                 .WithJsonDeserializer() // Register Json serializer -- any deserializer registration required
                 .WithFileSystemStorage(folder: "ProdConfigurations") // User file system as storage for configurations -- any storage registration required
-                .BuildAsync(CancellationToken.None).Result;
+                .Build();
 
             // Get config explicitly
-            var someServiceConfig = configurationManager.GetConfigurationAsync<SomeServiceConnectionSettings>(CancellationToken.None).Result;
-            var anotherServiceConfig1 = configurationManager.GetConfigurationAsync<AnotherServiceConnectionConfiguration>(CancellationToken.None).Result;
-            var anotherServiceConfig2 = configurationManager.GetConfigurationAsync("AnotherServiceConnection", typeof(AnotherServiceConnectionConfiguration), CancellationToken.None).Result;
+            var someServiceConfig = configurationManager.GetConfiguration<SomeServiceConnectionSettings>();
+            var anotherServiceConfig = configurationManager.GetConfiguration<AnotherServiceConnectionConfiguration>();
 
             var allConfigs = configurationManager
                 .GetConfigurationTypeInfos()
-                .Select(x =>
-                    configurationManager
-                    .GetConfigurationAsync(x.Name, x.Type, CancellationToken.None).Result)
+                .Select(x => configurationManager.GetConfiguration(x.Name, x.Type))
                 .ToArray();
 
             services.AddConfigurationTypes(configurationManager);
