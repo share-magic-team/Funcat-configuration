@@ -27,13 +27,13 @@ namespace FuncatConfiguration.Abstractions
         /// <summary>
         /// Initialize configuration data storage
         /// </summary>
-        /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Task</returns>
-        Task InitializeAsync(CancellationToken cancellationToken);
+        void Initialize();
 
         /// <summary>
         /// Initialize configuration data storage
         /// </summary>
-        void InitializeAsync();
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Task</returns>
+        Task InitializeAsync(CancellationToken cancellationToken);
     }
 }
