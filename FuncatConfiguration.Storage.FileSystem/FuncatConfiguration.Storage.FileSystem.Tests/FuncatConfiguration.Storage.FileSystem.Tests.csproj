@@ -17,18 +17,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FuncatConfiguration.Storage.FileSystem\FuncatConfiguration.Storage.FileSystem.csproj" />
-    <PackageReference Include="FuncatConfiguration.Deserializer.Json" Version="1.0.7" />
-    <PackageReference Include="FuncatConfiguration" Version="1.0.7" />
+    <PackageReference Include="FuncatConfiguration.Deserializer.Json" Version="1.0.9.1" />
+    <PackageReference Include="FuncatConfiguration" Version="1.0.9.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="TestEnvironmentBad\databaseConfiguration.1.json">
+    <None Update="TestEnvironmentBad\database.1.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="TestEnvironmentBad\databaseConfiguration.2.json">
+    <None Update="TestEnvironmentBad\database.2.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="TestEnvironment\databaseConfiguration.json">
+    <None Update="TestEnvironment\database.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

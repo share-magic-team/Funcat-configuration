@@ -11,7 +11,7 @@ namespace FuncatConfiguration.Storage.FileSystem.Tests
     public class Tests
     {
         [TestMethod]
-        public async Task ShouldLoadConfigurationByRelativePath()
+        public async Task ShouldLoadConfigurationByRelativePath_Async()
         {
             // Arrange
             var configurationManager = await ConfigurationManagerBuilder
@@ -31,19 +31,19 @@ namespace FuncatConfiguration.Storage.FileSystem.Tests
         }
 
         [TestMethod]
-        public async Task ShouldThrowExceptionWhenCannotFindConfigFile()
+        public void ShouldThrowExceptionWhenCannotFindConfigFile_NonAsync()
         {
             // Arrange
-            var configurationManager = await ConfigurationManagerBuilder
+            var configurationManager = ConfigurationManagerBuilder
                 .Create()
                 .WithFileSystemStorage("TestEnvironmentBad")
                 .WithJsonDeserializer()
                 .WithConfigurationType<DatabaseConfiguration>()
-                .BuildAsync(CancellationToken.None);
+                .Build();
 
             // Act / Assert
-            await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => configurationManager
-                .GetConfigurationAsync<DatabaseConfiguration>(CancellationToken.None));
+            Assert.ThrowsException<InvalidOperationException>(() => configurationManager
+                .GetConfiguration<DatabaseConfiguration>());
         }
     }
 }

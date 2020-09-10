@@ -23,13 +23,13 @@ namespace FuncatConfiguration.Storage.FileSystem
                 _absolutePath = folder;
         }
 
-        public Task<Stream> GetConfigStreamAsync(string configName, CancellationToken cancellationToken)
+        public Stream GetConfigStream(string configName)
         {
             if (string.IsNullOrWhiteSpace(configName))
                 throw new ArgumentException("Configuration name cannot be null, empty or white space", nameof(configName));
 
             if (_configFilesPathCache.TryGetValue(configName, out var path))
-                return Task.FromResult(new FileStream(path, FileMode.Open) as Stream);
+                return new FileStream(path, FileMode.Open);
 
             var partialPath = Path.Combine(_absolutePath, configName) + ".";
 
@@ -48,14 +48,23 @@ namespace FuncatConfiguration.Storage.FileSystem
 
             _configFilesPathCache.AddOrUpdate(configName, path, (k, v) => path);
 
-            return Task.FromResult(new FileStream(path, FileMode.Open) as Stream);
+            return new FileStream(path, FileMode.Open);
+        }
+
+        public Task<Stream> GetConfigStreamAsync(string configName, CancellationToken _)
+        {
+            return Task.FromResult(GetConfigStream(configName));
+        }
+
+        public void Initialize()
+        {
+            if (!Directory.Exists(_absolutePath))
+                throw new InvalidOperationException($"Cannot find directory [{_absolutePath}]");
         }
 
         public Task InitializeAsync(CancellationToken cancellationToken)
         {
-            if (!Directory.Exists(_absolutePath))
-                throw new InvalidOperationException($"Cannot find directory [{_absolutePath}]");
-
+            Initialize();
             return Task.CompletedTask;
         }
     }

@@ -23,30 +23,49 @@ namespace FuncatConfiguration.Storage.AzureBlobs
             _relativePathInShare = relativePathInShare;
         }
 
-        public Task<Stream> GetConfigStreamAsync(string configName, CancellationToken cancellationToken)
+        public Stream GetConfigStream(string configName)
         {
             if (string.IsNullOrWhiteSpace(configName))
                 throw new ArgumentException("Config name cannot be null or empty string", nameof(configName));
 
-            return FindByName(configName);
+            var file = FindFile(configName);
+            var stream = new MemoryStream();
+            file.DownloadToStream(stream);
+            stream.Position = 0;
+            return stream;
+        }
 
-            async Task<Stream> FindByName(string name)
+        public async Task<Stream> GetConfigStreamAsync(string configName, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrWhiteSpace(configName))
+                throw new ArgumentException("Config name cannot be null or empty string", nameof(configName));
+
+            var file = FindFile(configName);
+            var stream = new MemoryStream();
+            await file.DownloadToStreamAsync(stream, cancellationToken);
+            stream.Position = 0;
+            return stream;
+        }
+
+        public void Initialize()
+        {
+            var client = CloudStorageAccount.Parse(_connectionString).CreateCloudFileClient();
+            var cloudFileShare = client.GetShareReference(_shareName);
+
+            if (!cloudFileShare.Exists())
+                throw new InvalidOperationException($"Cloud file share not exist: [{_shareName}]");
+
+            _cloudFileDirectory = cloudFileShare.GetRootDirectoryReference();
+
+            if (!string.IsNullOrEmpty(_relativePathInShare))
             {
-                var items = _cloudFileDirectory
-                    .ListFilesAndDirectories(prefix: name + ".")
-                    .OfType<CloudFile>()
-                    .ToArray();
-
-                if (items.Count() == 0)
-                    throw new InvalidOperationException($"Cannot find file by pattern: [{name}.*]");
-                if (items.Count() > 1)
-                    throw new InvalidOperationException($"Multiple files found by pattern: [{name}.*]");
-
-                var stream = new MemoryStream();
-                await items[0].DownloadToStreamAsync(stream, cancellationToken);
-                stream.Position = 0;
-                return stream;
+                var pathElements = _relativePathInShare.Split(new[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var element in pathElements)
+                    _cloudFileDirectory = _cloudFileDirectory.GetDirectoryReference(element);
             }
+
+            if (!_cloudFileDirectory.Exists())
+                throw new InvalidOperationException($"Directory not exist: [{_relativePathInShare}]");
         }
 
         public async Task InitializeAsync(CancellationToken cancellationToken)
@@ -66,8 +85,23 @@ namespace FuncatConfiguration.Storage.AzureBlobs
                     _cloudFileDirectory = _cloudFileDirectory.GetDirectoryReference(element);
             }
 
-            if (!await _cloudFileDirectory.ExistsAsync())
+            if (!await _cloudFileDirectory.ExistsAsync(cancellationToken))
                 throw new InvalidOperationException($"Directory not exist: [{_relativePathInShare}]");
+        }
+
+        private CloudFile FindFile(string configName)
+        {
+            var items = _cloudFileDirectory
+                    .ListFilesAndDirectories(prefix: configName + ".")
+                    .OfType<CloudFile>()
+                    .ToArray();
+
+            if (items.Count() == 0)
+                throw new InvalidOperationException($"Cannot find file by pattern: [{configName}.*]");
+            if (items.Count() > 1)
+                throw new InvalidOperationException($"Multiple files found by pattern: [{configName}.*]");
+
+            return items[0];
         }
     }
 }
