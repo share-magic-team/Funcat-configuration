@@ -16,9 +16,19 @@ namespace FuncatConfiguration.Tests.Mocks
             _configsAndJson = configsAndJson;
         }
 
+        public Stream GetConfigStream(string configName)
+        {
+            return new MemoryStream(Encoding.UTF8.GetBytes(_configsAndJson[configName]));
+        }
+
         public Task<Stream> GetConfigStreamAsync(string configName, CancellationToken cancellationToken)
         {
             return Task.FromResult((Stream)new MemoryStream(Encoding.UTF8.GetBytes(_configsAndJson[configName])));
+        }
+
+        public void Initialize()
+        {
+            // Do nothings
         }
 
         public Task InitializeAsync(CancellationToken cancellationToken)

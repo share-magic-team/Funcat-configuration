@@ -12,6 +12,31 @@ namespace FuncatConfiguration
     public static class ConfigurationManagerBuilderExtensions
     {
         /// <summary>
+        /// Build configuration manager
+        /// </summary>
+        /// <param name="builder">Builder</param>
+        /// <returns>Configuration manager</returns>
+        public static ConfigurationManager Build(this ConfigurationManagerBuilder builder)
+        {
+            try
+            {
+                if (builder.Deserializer == null)
+                    throw new InvalidOperationException("Deserializer not set");
+
+                if (builder.Storage == null)
+                    throw new InvalidOperationException("Storage not set");
+
+                builder.Storage.Initialize();
+
+                return new ConfigurationManager(builder.Storage, builder.Deserializer, new ReadOnlyDictionary<string, ConfigurationTypeInfo>(builder.ConfigurationTypeInfos));
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+        }
+
+        /// <summary>
         /// Asynchronously build configuration manager
         /// </summary>
         /// <param name="builder">Builder</param>

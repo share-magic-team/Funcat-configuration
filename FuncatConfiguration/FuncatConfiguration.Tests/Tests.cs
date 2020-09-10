@@ -40,11 +40,11 @@ namespace FuncatConfiguration.Tests
         }
 
         [TestMethod]
-        public async Task Should_fail_build_cause_of_deserializer_not_set()
+        public void Should_fail_build_cause_of_deserializer_not_set()
         {
             var builder = ConfigurationManagerBuilder.Create();
 
-            await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => builder
+            Assert.ThrowsException<InvalidOperationException>(() => builder
                 .WithConfigurationType<Config1>(true)
                 .WithConfigurationType<Config2>(true)
                 .WithStorage(new MockStorage(new Dictionary<string, string>
@@ -52,7 +52,7 @@ namespace FuncatConfiguration.Tests
                     { "Config1", "{ \"ConnectionString1\": \"connstr1\", \"SomeInteger1\": \"1\" }" },
                     { "Config2", "{ \"ConnectionString2\": \"connstr2\", \"SomeInteger2\": \"2\" }" },
                 }))
-                .BuildAsync(CancellationToken.None));
+                .Build());
         }
 
         [TestMethod]
