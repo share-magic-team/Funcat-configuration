@@ -18,9 +18,14 @@ namespace FuncatConfiguration.Deserializer.Json
                 JsonSerializer.Create(settings);
         }
 
-        public Task<object> DeserializeAsync(Type configurationType, Stream stream, CancellationToken cancellationToken)
+        public object Deserialize(Type configurationType, Stream stream)
         {
-            return Task.FromResult(_serializer.Deserialize(new JsonTextReader(new StreamReader(stream)), configurationType));
+            return _serializer.Deserialize(new JsonTextReader(new StreamReader(stream)), configurationType);
+        }
+
+        public Task<object> DeserializeAsync(Type configurationType, Stream stream, CancellationToken _)
+        {
+            return Task.FromResult(Deserialize(configurationType, stream));
         }
     }
 }

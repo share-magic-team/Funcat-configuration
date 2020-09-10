@@ -8,7 +8,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/share-magic-team/Funcat-configuration</PackageProjectUrl>
     <RepositoryUrl>https://github.com/share-magic-team/Funcat-configuration</RepositoryUrl>
-    <Version>1.0.7</Version>
+    <Version>1.0.9.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FuncatConfiguration.Abstractions" Version="1.0.7" />
-    <PackageReference Include="FuncatConfiguration" Version="1.0.7" />
+    <PackageReference Include="FuncatConfiguration.Abstractions" Version="1.0.9.1" />
+    <PackageReference Include="FuncatConfiguration" Version="1.0.9.1" />
   </ItemGroup>
 
 </Project>
